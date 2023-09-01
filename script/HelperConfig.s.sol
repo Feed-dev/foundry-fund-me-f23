@@ -21,6 +21,8 @@ contract HelperConfig is Script {
             activeNetworkConfig = getMainnetEthConfig();
         } else if (block.chainid == 42161) {
             activeNetworkConfig = getMainnetArbitrumConfig();
+        } else if (block.chainid == 10) {
+            activeNetworkConfig = getMainnetOptimismConfig();
         } else {
             activeNetworkConfig = getOrCreateAnvilEthConfig();
         }
@@ -49,6 +51,17 @@ contract HelperConfig is Script {
             priceFeed: 0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612
         });
         return ArbitrumConfig;
+    }
+
+    function getMainnetOptimismConfig()
+        public
+        pure
+        returns (NetworkConfig memory)
+    {
+        NetworkConfig memory MainnetOptimismConfig = NetworkConfig({
+            priceFeed: 0x13e3Ee699D1909E989722E753853AE30b17e08c5
+        });
+        return MainnetOptimismConfig;
     }
 
     function getOrCreateAnvilEthConfig() public returns (NetworkConfig memory) {
